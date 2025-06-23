@@ -1,0 +1,29 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Resources:
+  LambdaExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: LambdaS3ProcessingRole
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess
+        - arn:aws:iam::aws:policy/AmazonSNSFullAccess
+        - arn:aws:iam::aws:policy/CloudWatchLogsFullAccess
+
+  FileProcessorLambda:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: S3FileProcessor
+      Handler: lambda_function.lambda_handler
+      Role: !GetAtt LambdaExecutionRole.Arn
+      Runtime: python3.12
+      Code:
+        S3Bucket: lamda_code_bucket
+        S3Key: lambda_function.py
+      Timeout: 60

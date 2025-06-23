@@ -1,0 +1,13 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Resources:
+  FileProcessedTopic:
+    Type: AWS::SNS::Topic
+    Properties:
+      TopicName: FileProcessedTopic
+
+  EmailSubscription:
+    Type: AWS::SNS::Subscription
+    Properties:
+      Endpoint: azamiheme19@gmail.com
+      Protocol: email
+      TopicArn: !Ref FileProcessedTopic
