@@ -1,0 +1,84 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Complete Master Stack - Event-Driven File Processing System on AWS
+
+Resources:
+
+  ### S3 Bucket
+  FileUploadBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: file-upload-bucket-azamcloud
+      NotificationConfiguration:
+        LambdaConfigurations:
+          - Event: s3:ObjectCreated:*
+            Function: !GetAtt FileProcessorLambda.Arn
+
+  ### SNS Topic
+  FileProcessedTopic:
+    Type: AWS::SNS::Topic
+    Properties:
+      TopicName: FileProcessedTopic
+
+  ### SNS Email Subscription
+  EmailSubscription:
+    Type: AWS::SNS::Subscription
+    Properties:
+      Endpoint: azamiheme19@gmail.com
+      Protocol: email
+      TopicArn: !Ref FileProcessedTopic
+
+  ### Lambda Execution Role
+  LambdaExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: LambdaS3ProcessingRole
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess
+        - arn:aws:iam::aws:policy/AmazonSNSFullAccess
+        - arn:aws:iam::aws:policy/CloudWatchLogsFullAccess
+
+  ### Lambda Function
+  FileProcessorLambda:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: S3FileProcessor
+      Handler: lambda_function.lambda_handler
+      Role: !GetAtt LambdaExecutionRole.Arn
+      Runtime: python3.12
+      Code:
+        S3Bucket: lamda-code-bucket2123
+        S3Key: lambda_package.zip
+      Timeout: 60
+      Environment:
+        Variables:
+          SNS_TOPIC_ARN: !Ref FileProcessedTopic
+
+  ### Permission for S3 to invoke Lambda
+  LambdaInvokePermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !Ref FileProcessorLambda
+      Action: lambda:InvokeFunction
+      Principal: s3.amazonaws.com
+      SourceArn: !GetAtt FileUploadBucket.Arn
+
+Outputs:
+
+  S3BucketName:
+    Description: Name of the provisioned S3 bucket
+    Value: !Ref FileUploadBucket
+
+  LambdaFunctionName:
+    Description: Name of Lambda function
+    Value: !Ref FileProcessorLambda
+
+  SNSTopicArn:
+    Description: SNS Topic ARN
+    Value: !Ref FileProcessedTopic
