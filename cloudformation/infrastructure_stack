@@ -13,6 +13,19 @@ Resources:
           - Event: s3:ObjectCreated:*
             Function: !GetAtt FileProcessorLambda.Arn
 
+  ### S3 Bucket for Lambda Artifacts
+  LambdaArtifactsBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub 'lambda-deploy-artifacts-${AWS::AccountId}-${AWS::Region}'
+      VersioningConfiguration:
+        Status: Enabled
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true          
+
   ### SNS Topic
   FileProcessedTopic:
     Type: AWS::SNS::Topic
@@ -82,3 +95,4 @@ Outputs:
   SNSTopicArn:
     Description: SNS Topic ARN
     Value: !Ref FileProcessedTopic
+
