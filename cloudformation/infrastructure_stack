@@ -17,7 +17,7 @@ Resources:
   LambdaArtifactsBucket:
     Type: AWS::S3::Bucket
     Properties:
-      BucketName: !Sub 'lambda-deploy-artifacts-${AWS::AccountId}-${AWS::Region}'
+      BucketName: LamdaCodeBucket-azamcloud
       VersioningConfiguration:
         Status: Enabled
       PublicAccessBlockConfiguration:
