@@ -13,6 +13,6 @@ phases:
   post_build:
     commands:
       - echo "Uploading zipped file to S3"
-      - aws s3 cp lambda-package.zip s3://your-s3-bucket-name/lambda-package.zip
+      - aws s3 cp lambda-package.zip s3://LamdaCodeBucket-azamcloud/lambda-package.zip
 
   discard-paths: yes
