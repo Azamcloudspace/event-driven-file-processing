@@ -6,7 +6,7 @@ Resources:
  LambdaArtifactsBucket:
      Type: AWS::S3::Bucket
      Properties:
-       BucketName: LamdaCodeBucket-azamcloud
+       BucketName: lamda-code-bucket-azamcloud
        VersioningConfiguration:
          Status: Enabled
        PublicAccessBlockConfiguration:
