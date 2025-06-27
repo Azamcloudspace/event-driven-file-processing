@@ -1,0 +1,24 @@
+AWSTemplateFormatVersion: '2010-09-09'
+
+Resources:
+
+ ### S3 Bucket for Lambda Artifacts
+ LambdaArtifactsBucket:
+     Type: AWS::S3::Bucket
+     Properties:
+       BucketName: LamdaCodeBucket-azamcloud
+       VersioningConfiguration:
+         Status: Enabled
+       PublicAccessBlockConfiguration:
+         BlockPublicAcls: true
+         BlockPublicPolicy: true
+         IgnorePublicAcls: true
+         RestrictPublicBuckets: true          
+        
+        
+Outputs:
+  LamdaS3CodeBucket:
+    Description: 
+    Value: !Ref LambdaArtifactsBucket
+    Export:
+     Name: LamdaS3CodeBucketName

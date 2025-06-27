@@ -1,0 +1,21 @@
+AWSTemplateFormatVersion: '2010-09-09'
+
+Resources:
+
+  ### S3 Bucket
+  FileUploadBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: file-upload-bucket-azamcloud
+      NotificationConfiguration:
+        LambdaConfigurations:
+          - Event: s3:ObjectCreated:*
+            Function: !ImportValue FileProcessorLambda.Arn
+
+Outputs:
+
+  FileUploadBucketName:
+    Description: Name of the S3 bucket for file uploads
+    Value: !Ref FileUploadBucket
+    Export:
+      Name: FileUploadBucketName

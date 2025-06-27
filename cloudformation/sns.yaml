@@ -1,0 +1,30 @@
+AWSTemplateFormatVersion: '2010-09-09'
+
+Resources:
+ ### SNS Topic
+  FileProcessedTopic:
+    Type: AWS::SNS::Topic
+    Properties:
+      TopicName: FileProcessedTopic
+
+  ### SNS Email Subscription
+  EmailSubscription:
+    Type: AWS::SNS::Subscription
+    Properties:
+      Endpoint: azamiheme19@gmail.com
+      Protocol: email
+      TopicArn: !Ref FileProcessedTopic
+
+Outputs:
+  SNSTopic:
+    Description: 
+    Value: !Ref FileProcessedTopic
+    Export:
+     Name: SNSTopicName
+
+  
+  SNSEmailSubscription:
+    Description: 
+    Value: !Ref EmailSubscription
+    Export:
+     Name: SNSEmailSubscription
