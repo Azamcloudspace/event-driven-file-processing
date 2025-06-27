@@ -17,14 +17,12 @@ Resources:
 
 Outputs:
   SNSTopic:
-    Description: 
     Value: !Ref FileProcessedTopic
     Export:
      Name: SNSTopicName
 
   
   SNSEmailSubscription:
-    Description: 
     Value: !Ref EmailSubscription
     Export:
      Name: SNSEmailSubscription
