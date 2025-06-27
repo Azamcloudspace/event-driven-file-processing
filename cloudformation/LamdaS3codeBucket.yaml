@@ -19,7 +19,6 @@ Resources:
         
 Outputs:
   LamdaS3CodeBucket:
-    Description: 
     Value: !Ref LambdaArtifactsBucket
     Export:
      Name: LamdaS3CodeBucketName
