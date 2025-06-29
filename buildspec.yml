@@ -6,15 +6,12 @@ phases:
       python: 3.9
   build:
     commands:
-      - echo "Debugging workspace:"
-      - ls -alh
-      - find .
       - echo "Zipping Lambda function..."
-      - zip lambda-package.zip lamda/lambda_function.py
+      - zip lambda-package.zip lambda/lambda_function.py
   post_build:
     commands:
       - echo "Uploading to S3"
-      - aws s3 cp lambda-package.zip s3://lamda-code-bucket-azamcloud/lambda-package.zip --region us-east-1
+      - aws s3 cp lambda-package.zip s3://lamda-code-bucket-azamcloud/lambda-package.zip
 
 artifacts:
   files:
