@@ -5,7 +5,7 @@ Resources:
   LambdaExecutionRole:
     Type: AWS::IAM::Role
     Properties:
-      RoleName: LambdaS3ProcessingRole
+      RoleName: LamdaS3ProcessingRole
       AssumeRolePolicyDocument:
         Version: '2012-10-17'
         Statement:
