@@ -21,13 +21,11 @@ Resources:
         
 Outputs:
   LamdaS3CodeBucket:
-    Description: 
     Value: !Ref LambdaArtifactsBucket
     Export:
      Name: LamdaS3CodeBucketName
 
   LamdaCode:
-   Description:
    Value: !Ref LambdaZipKey
    Export:
      Name: LamdaCodeName
