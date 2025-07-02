@@ -1,28 +1,11 @@
 AWSTemplateFormatVersion: '2010-09-09'
 
 Resources:
-  ### Lambda Execution Role
-  LambdaExecutionRole:
-    Type: AWS::IAM::Role
-    Properties:
-      AssumeRolePolicyDocument:
-        Version: '2012-10-17'
-        Statement:
-          - Effect: Allow
-            Principal:
-              Service: lambda.amazonaws.com
-            Action: sts:AssumeRole
-      ManagedPolicyArns:
-        - arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess
-        - arn:aws:iam::aws:policy/AmazonSNSFullAccess
-        - arn:aws:iam::aws:policy/CloudWatchLogsFullAccess
-
-  ### Lambda Function
   FileProcessorLambda:
     Type: AWS::Lambda::Function
     Properties:
       Handler: lambda_function.lambda_handler
-      Role: !GetAtt LambdaExecutionRole.Arn
+      Role: !ImportValue IAMRoleName
       Runtime: python3.12
       Code:
         S3Bucket: !ImportValue LamdaS3CodeBucketName
