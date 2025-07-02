@@ -10,8 +10,8 @@ Resources:
 
 Outputs:
 
-  FileUploadBucketName:
+  FileUploadBucketArn:
     Description: Name of the S3 bucket for file uploads
     Value: !Sub arn:aws:s3:::${FileUploadBucket}
     Export:
-      Name: FileUploadBucketName
+      Name: FileUploadBucketArn
