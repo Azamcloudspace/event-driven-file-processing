@@ -39,6 +39,6 @@ Resources:
       FunctionName: !Ref FileProcessorLambda
       Action: lambda:InvokeFunction
       Principal: s3.amazonaws.com
-      SourceArn: !ImportValue FileUploadBucketName
+      SourceArn: !ImportValue FileUploadBucketArn
 
       
