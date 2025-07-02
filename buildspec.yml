@@ -1,0 +1,19 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      python: 3.9
+  build:
+    commands:
+      - echo "Zipping Lambda function..."
+      - zip lambda-package.zip lambda/lambda_function.py
+  post_build:
+    commands:
+      - echo "Uploading to S3"
+      - aws s3 cp lambda-package.zip s3://lamda-code-bucket-azamcloud/lambda-package.zip
+
+artifacts:
+  files:
+    - lambda-package.zip
+  discard-paths: true

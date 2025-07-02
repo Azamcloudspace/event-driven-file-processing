@@ -1,0 +1,33 @@
+AWSTemplateFormatVersion: '2010-09-09'
+
+Parameters:
+  LambdaZipKey:
+    Type: String
+    Default: lambda_package.zip
+    Description: Name of the zip file to be uploaded
+
+
+Resources:
+
+  # S3 Bucket for Lambda Artifacts
+
+ LambdaArtifactsBucket:
+  Type: AWS::S3::Bucket
+  Properties:
+    BucketName: lamda-code-bucket-azamcloud
+    VersioningConfiguration:
+     Status: Enabled
+        
+        
+Outputs:
+  LamdaS3CodeBucket:
+    Description: 
+    Value: !Ref LambdaArtifactsBucket
+    Export:
+     Name: LamdaS3CodeBucketName
+
+  LamdaCode:
+   Description:
+   Value: !Ref LambdaZipKey
+   Export:
+     Name: LamdaCodeName
