@@ -3,7 +3,7 @@ AWSTemplateFormatVersion: '2010-09-09'
 Parameters:
   LambdaZipKey:
     Type: String
-    Default: lambda_package.zip
+    Default: lambda-package.zip
     Description: Name of the zip file to be uploaded
 
 
