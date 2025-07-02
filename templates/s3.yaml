@@ -12,6 +12,6 @@ Outputs:
 
   FileUploadBucketName:
     Description: Name of the S3 bucket for file uploads
-    Value: !Ref FileUploadBucket
+    Value: !GetAtt FileUploadBucket
     Export:
       Name: FileUploadBucketName
