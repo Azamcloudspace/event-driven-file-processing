@@ -21,7 +21,7 @@ Resources:
   FileProcessorLambda:
     Type: AWS::Lambda::Function
     Properties:
-      Handler: lambda_function.lambda_handler
+      Handler: lambda.lambda_function.lambda_handler
       Role: !GetAtt LambdaExecutionRole.Arn
       Runtime: python3.12
       Code:
