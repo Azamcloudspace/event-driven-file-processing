@@ -41,4 +41,9 @@ Resources:
       Principal: s3.amazonaws.com
       SourceArn: !ImportValue FileUploadBucketArn
 
-      
+      Outputs:
+
+  FileProcessorLambdaArn:
+    Value: !GetAtt FileProcessorLambda.Arn
+    Export:
+      Name: FileProcessorLambdaArn
