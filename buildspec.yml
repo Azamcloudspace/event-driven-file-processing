@@ -7,15 +7,14 @@ phases:
 
   build:
     commands:
-      - echo "Zipping Lambda function..."
-      - cd lambda && zip ../lambda-package.zip lambda_function.py && cd ..
+      - echo "Preparing Lambda code upload..."
 
   post_build:
     commands:
-      - echo "Uploading to S3"
-      - aws s3 cp lambda-package.zip s3://lamda-code-bucket-azamcloud/lambda-package.zip
+      - echo "Uploading raw lambda_function.py to S3..."
+      - aws s3 cp lambda/lambda_function.py s3://lamda-code-bucket-azamcloud/lambda_function.py
 
 artifacts:
   files:
-    - lambda-package.zip
+    - lambda/lambda_function.py
   discard-paths: true
