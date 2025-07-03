@@ -4,10 +4,12 @@ phases:
   install:
     runtime-versions:
       python: 3.9
+
   build:
     commands:
       - echo "Zipping Lambda function..."
-      - zip lambda-package.zip lambda/lambda_function.py
+      - cd lambda && zip ../lambda-package.zip lambda_function.py && cd ..
+
   post_build:
     commands:
       - echo "Uploading to S3"
