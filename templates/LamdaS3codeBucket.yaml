@@ -1,12 +1,5 @@
 AWSTemplateFormatVersion: '2010-09-09'
 
-Parameters:
-  LambdaZipKey:
-    Type: String
-    Default: lambda-package.zip
-    Description: Name of the zip file to be uploaded
-
-
 Resources:
 
   # S3 Bucket for Lambda Artifacts
@@ -24,8 +17,3 @@ Outputs:
     Value: !Ref LambdaArtifactsBucket
     Export:
      Name: LamdaS3CodeBucketName
-
-  LamdaCode:
-   Value: !Ref LambdaZipKey
-   Export:
-     Name: LamdaCodeName
