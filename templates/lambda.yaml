@@ -24,9 +24,6 @@ Resources:
       Handler: lambda.lambda_function.lambda_handler
       Role: !GetAtt LambdaExecutionRole.Arn
       Runtime: python3.13
-      Code:
-        S3Bucket: !ImportValue LamdaS3CodeBucketName
-        S3Key: !ImportValue LamdaCodeName
       Timeout: 60
       Environment:
         Variables:
